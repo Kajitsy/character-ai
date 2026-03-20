@@ -65,6 +65,7 @@ class AsyncClient(BaseClient):
         self.chat = methods.ChatMethods(self, self.__requester)
         self.character = methods.CharacterMethods(self, self.__requester)
         self.utils = methods.UtilsMethods(self, self.__requester)
+        self.voice = methods.VoiceMethods(self, self.__requester)
 
     def _get_requester(self) -> Requester:
         return self.__requester
