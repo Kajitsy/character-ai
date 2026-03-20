@@ -28,7 +28,7 @@ class AccountMethods:
         )
 
         if request.status_code == 200:
-            return Account(request.json().get("user", {}).get('user', {}))
+            return Account(request.json().get("user", {}))
 
         raise FetchError("Cannot fetch your account.")
 
