@@ -96,7 +96,7 @@ class CharacterMethods:
 
     async def fetch_similar_characters(self, character_id: str, **kwargs: Any) -> List[CharacterShort]:
         request = await self.__requester.request_async(
-            url=f"https://neo.character.ai/recommendation/v1/character/{character_id}",
+            url=f"https://neo.character.ai/recommendation/v1/character/similar/{character_id}",
             options={"headers": self.__client.get_headers(kwargs.get("token", None))},
         )
         
