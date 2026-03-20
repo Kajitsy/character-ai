@@ -70,7 +70,7 @@ class Character(BaseCAI):
         self.starter_prompts = options.get("starter_prompts", {})
         self.comments_enabled = options.get("comments_enabled", False)
         self.internal_id = options.get("participant__user__username", "")
+        self.short_hash = options.get("short_hash", "")
 
         self.voice_id = options.get("voice_id", "")
         self.default_voice_id = options.get("default_voice_id", "")
-        self.songs = options.get("songs", [])
