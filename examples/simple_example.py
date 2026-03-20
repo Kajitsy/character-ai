@@ -1,7 +1,7 @@
 import asyncio
 
-from PyCharacterAI import get_client
-from PyCharacterAI.exceptions import SessionClosedError
+from characterai import get_client
+from characterai.exceptions import SessionClosedError
 
 token = "TOKEN"
 character_id = "ID"

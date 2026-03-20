@@ -23,12 +23,13 @@ class AccountMethods:
 
     async def fetch_me(self, **kwargs: Any) -> Account:
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/user/",
+            url="https://neo.character.ai/user/",
             options={"headers": self.__client.get_headers(kwargs.get("token", None))},
         )
 
         if request.status_code == 200:
-            return Account(request.json().get("user").get("user"))
+            print(request.json().get("user", {}).get("user", {}))
+            return Account(request.json().get("user", {}).get('user', {}))
 
         raise FetchError("Cannot fetch your account.")
 

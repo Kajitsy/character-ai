@@ -13,11 +13,10 @@ class Account(BaseCAI):
 
         self.username: str = options.get("username", "")
         self.name: str = account.get("name", "")
-        self.bio: str = options.get("bio", "")
 
         self.avatar: Optional[Avatar] = None
 
-        avatar_file_name = options.get("avatar_file_name", "")
+        avatar_file_name = account.get("avatar_file_name", "")
         if avatar_file_name != "":
             self.avatar = Avatar({"file_name": avatar_file_name})
 

@@ -30,7 +30,7 @@ If you have any questions, problems, suggestions, please open an issue or contac
 First, you need to install the library:
 
 ```bash
-pip install PyCharacterAI
+pip install character-ai
 ```
 
 ---
@@ -38,7 +38,7 @@ pip install PyCharacterAI
 Import the `Client` class from the library and create a new instance of it:
 
 ```Python
-from PyCharacterAI import Client
+from characterai import Client
 ```
 
 ```Python
@@ -61,7 +61,7 @@ await client.authenticate("TOKEN")
 Or you can just call `get_client()` method:
 
 ```Python
-from PyCharacterAI import get_client
+from characterai import get_client
 
 client = await get_client(token="TOKEN", web_next_auth="WEB_NEXT_AUTH")
 ```
@@ -108,8 +108,8 @@ This library uses two types of tokens: a common `token` and `web_next_auth`. The
 ```Python
 import asyncio
 
-from PyCharacterAI import get_client
-from PyCharacterAI.exceptions import SessionClosedError
+from characterai import get_client
+from characterai.exceptions import SessionClosedError
 
 token = "TOKEN"
 character_id = "ID"
@@ -150,8 +150,8 @@ A more advanced example. You can use so-called streaming to receive a message in
 ```Python
 import asyncio
 
-from PyCharacterAI import get_client
-from PyCharacterAI.exceptions import SessionClosedError
+from characterai import get_client
+from characterai.exceptions import SessionClosedError
 
 token = "TOKEN"
 character_id = "ID"
