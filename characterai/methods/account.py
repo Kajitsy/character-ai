@@ -80,7 +80,7 @@ class AccountMethods:
 
     async def fetch_my_personas(self, **kwargs: Any) -> List[Persona]:
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/personas/?force_refresh=1",
+            url="https://neo.character.ai/character/v1/get_user_personas?force_refresh=1",
             options={"headers": self.__client.get_headers(kwargs.get("token", None))},
         )
 
