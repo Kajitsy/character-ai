@@ -1,7 +1,7 @@
 import uuid
 import json
 
-from typing import Any, List, Dict, Optional
+from typing import Any, List, Optional
 from urllib.parse import quote
 
 from ..types import Character, CharacterShort

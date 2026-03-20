@@ -1,5 +1,6 @@
 import json
 from typing import Optional, List, Any
+from urllib.parse import quote
 
 from ..types import PublicUser, Voice
 from ..exceptions import FetchError, ActionError
@@ -13,17 +14,23 @@ class UserMethods:
         self.__requester = requester
 
     async def fetch_user(self, username: str, **kwargs: Any) -> Optional[PublicUser]:
+        payload = {
+            '0': {
+                'json': {
+                    'username': quote(username)
+                }
+            }
+        }
+
+        web_next_auth = kwargs.get("web_next_auth", None)
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/user/public/",
-            options={
-                "method": "POST",
-                "headers": self.__client.get_headers(kwargs.get("token", None)),
-                "body": json.dumps({"username": username}),
-            },
+            url=f"https://character.ai/api/trpc/social.publicProfile?batch=1"
+                f"&input={json.dumps(payload, separators=(',', ':'))}",
+            options={"cookies": {"web-next-auth": web_next_auth} if web_next_auth else {}}
         )
 
         if request.status_code == 200:
-            return PublicUser(request.json().get("public_user"))
+            return PublicUser(request.json()[0].get("result", {}).get("data", {}).get("json", {}))
 
         if request.status_code == 500:
             return None
