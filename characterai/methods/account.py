@@ -114,7 +114,7 @@ class AccountMethods:
 
     async def fetch_my_upvoted_characters(self, **kwargs: Any) -> List[CharacterShort]:
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/user/characters/upvoted/",
+            url="https://neo.character.ai/character/v1/upvoted_characters",
             options={"headers": self.__client.get_headers(kwargs.get("token", None))},
         )
 
@@ -248,7 +248,7 @@ class AccountMethods:
             raise InvalidArgumentError("Cannot create persona. Definition must be no more than 750 characters.")
 
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/persona/create/",
+            url="https://neo.character.ai/character/v1/create_persona",
             options={
                 "method": "POST",
                 "headers": self.__client.get_headers(kwargs.get("token", None)),
@@ -329,7 +329,7 @@ class AccountMethods:
             payload["avatar_rel_path"] = avatar_rel_path
 
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/persona/update/",
+            url="https://neo.character.ai/character/v1/update_persona",
             options={
                 "method": "POST",
                 "headers": self.__client.get_headers(kwargs.get("token", None)),
@@ -374,7 +374,7 @@ class AccountMethods:
         }
 
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/persona/update/",
+            url="https://neo.character.ai/character/v1/update_persona",
             options={
                 "method": "POST",
                 "headers": self.__client.get_headers(kwargs.get("token", None)),
