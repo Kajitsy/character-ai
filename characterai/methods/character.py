@@ -233,7 +233,7 @@ class CharacterMethods:
             raise InvalidArgumentError("Cannot create character. Definition must be no more than 32000 characters.")
 
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/character/create/",
+            url="https://neo.character.ai/character/v1/create_character",
             options={
                 "method": "POST",
                 "headers": self.__client.get_headers(kwargs.get("token", None)),
@@ -306,7 +306,7 @@ class CharacterMethods:
             raise InvalidArgumentError("Cannot edit character. Definition must be no more than 32000 characters.")
 
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/character/update/",
+            url="https://neo.character.ai/character/v1/update_character",
             options={
                 "method": "POST",
                 "headers": self.__client.get_headers(kwargs.get("token", None)),
