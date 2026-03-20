@@ -22,28 +22,33 @@ class CharacterMethods:
         self.__client = client
         self.__requester = requester
 
-    async def fetch_characters_by_category(self, **kwargs: Any) -> Dict[str, List[CharacterShort]]:
+    async def fetch_discovery_tags(self, **kwargs: Any) -> List[str]:
         request = await self.__requester.request_async(
-            url="https://plus.character.ai/chat/curated_categories/characters/",
+            url="https://neo.character.ai/recommendation/v1/discovery_tags",
             options={"headers": self.__client.get_headers(kwargs.get("token", None))},
         )
 
         if request.status_code == 200:
-            characters_by_category = {}
-            raw = request.json().get("characters_by_curated_category", {})
+            return request.json().get("tags", [])
 
-            for category in raw.keys():
-                characters_raw = raw.get(category)
-                characters = []
+        raise FetchError("Cannot fetch discovery tags.")
 
-                for character_raw in characters_raw:
-                    characters.append(CharacterShort(character_raw))
+    async def fetch_characters_with_tags(self, tag: str, **kwargs: Any) -> List[CharacterShort]:
+        request = await self.__requester.request_async(
+            url=f"https://neo.character.ai/recommendation/v1/characters_with_tag/{tag}",
+            options={"headers": self.__client.get_headers(kwargs.get("token", None))},
+        )
 
-                characters_by_category[category] = characters
+        if request.status_code == 200:
+            characters_raw = request.json().get("characters", {})
+            characters = []
 
-            return characters_by_category
+            for character_raw in characters_raw:
+                characters.append(CharacterShort(character_raw))
 
-        raise FetchError("Cannot fetch characters by category.")
+            return characters
+
+        raise FetchError("Cannot fetch characters with tag.")
 
     async def fetch_recommended_characters(self, **kwargs: Any) -> List[CharacterShort]:
         request = await self.__requester.request_async(
